@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Restaurant Atlas</title>
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+padding:20px;
+background:#f5f5f5;
+}
+
+h1{
+text-align:center;
+}
+
+.produit{
+background:white;
+padding:15px;
+margin:10px 0;
+border-radius:10px;
+}
+
+button{
+padding:10px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+.panier{
+background:white;
+padding:15px;
+margin-top:20px;
+border-radius:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>🍔 Restaurant Atlas</h1>
+
+<div class="produit">
+<h3>Double Burger</h3>
+<p>75 DH</p>
+<button onclick="ajouter('Double Burger',75)">
+Ajouter
+</button>
+</div>
+
+<div class="produit">
+<h3>Tacos Poulet</h3>
+<p>55 DH</p>
+<button onclick="ajouter('Tacos Poulet',55)">
+Ajouter
+</button>
+</div>
+
+<div class="produit">
+<h3>Coca-Cola</h3>
+<p>10 DH</p>
+<button onclick="ajouter('Coca-Cola',10)">
+Ajouter
+</button>
+</div>
+
+<div class="panier">
+
+<h2>Panier</h2>
+
+<ul id="liste"></ul>
+
+<p>
+Total :
+<span id="total">0</span> DH
+</p>
+
+<button onclick="commander()">
+Commander sur WhatsApp
+</button>
+
+</div>
+
+<script>
+
+let panier=[];
+let total=0;
+
+function ajouter(nom,prix){
+
+panier.push(nom);
+
+total+=prix;
+
+document.getElementById("total").innerText=total;
+
+let li=document.createElement("li");
+
+li.innerText=nom;
+
+document.getElementById("liste").appendChild(li);
+
+}
+
+function commander(){
+
+let message="Bonjour,%0A%0AJe souhaite commander :%0A";
+
+panier.forEach(item=>{
+message+="- "+item+"%0A";
+});
+
+message+="%0ATotal : "+total+" DH";
+
+window.open(
+"https://wa.me/212600000000?text="+message
+);
+
+}
+
+</script>
+
+</body>
+</html>
