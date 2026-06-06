@@ -111,41 +111,61 @@ Commander sur WhatsApp
 
 <script>
 
-let panier=[];
+let panier = {};
+
+function ajouter(nom, prix){
+
+if(!panier[nom]){
+panier[nom] = {
+quantite:0,
+prix:prix
+};
+}
+
+panier[nom].quantite++;
+
+afficherPanier();
+
+}
+
+function retirer(nom){
+
+if(panier[nom]){
+
+panier[nom].quantite--;
+
+if(panier[nom].quantite <= 0){
+delete panier[nom];
+}
+
+}
+
+afficherPanier();
+
+}
+
+function afficherPanier(){
+
+let liste = document.getElementById("liste");
+
+liste.innerHTML="";
+
 let total=0;
 
-function ajouter(nom,prix){
+for(let nom in panier){
 
-panier.push(nom);
+let qte = panier[nom].quantite;
 
-total+=prix;
+let prix = panier[nom].prix;
 
-document.getElementById("total").innerText=total;
+total += qte * prix;
 
-let li=document.createElement("li");
+let li = document.createElement("li");
 
-li.innerText=nom;
-
-document.getElementById("liste").appendChild(li);
-
-}
-
-function commander(){
-
-let message="Bonjour,%0A%0AJe souhaite commander :%0A";
-
-panier.forEach(item=>{
-message+="- "+item+"%0A";
-});
-
-message+="%0ATotal : "+total+" DH";
-
-window.open(
-"https://wa.me/212600000000?text="+message
-);
-
-}
-
+li.innerHTML =
+nom +
+" x" + qte +
+" (" + (qte*prix) +
 </script>
 
 </body>
