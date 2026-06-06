@@ -115,57 +115,83 @@ let panier = {};
 
 function ajouter(nom, prix){
 
-if(!panier[nom]){
-panier[nom] = {
-quantite:0,
-prix:prix
-};
-}
+    if(!panier[nom]){
+        panier[nom] = {
+            quantite: 0,
+            prix: prix
+        };
+    }
 
-panier[nom].quantite++;
-
-afficherPanier();
-
+    panier[nom].quantite++;
+    afficherPanier();
 }
 
 function retirer(nom){
 
-if(panier[nom]){
+    if(panier[nom]){
 
-panier[nom].quantite--;
+        panier[nom].quantite--;
 
-if(panier[nom].quantite <= 0){
-delete panier[nom];
-}
+        if(panier[nom].quantite <= 0){
+            delete panier[nom];
+        }
 
-}
-
-afficherPanier();
-
+        afficherPanier();
+    }
 }
 
 function afficherPanier(){
 
-let liste = document.getElementById("liste");
+    let liste = document.getElementById("liste");
 
-liste.innerHTML="";
+    liste.innerHTML = "";
 
-let total=0;
+    let total = 0;
 
-for(let nom in panier){
+    for(let nom in panier){
 
-let qte = panier[nom].quantite;
+        let qte = panier[nom].quantite;
+        let prix = panier[nom].prix;
 
-let prix = panier[nom].prix;
+        total += qte * prix;
 
-total += qte * prix;
+        let li = document.createElement("li");
 
-let li = document.createElement("li");
+        li.innerHTML =
+        nom +
+        " x" + qte +
+        " - " + (qte * prix) +
+        " DH " +
+        '<button onclick="retirer(\'' + nom + '\')">-</button>';
 
-li.innerHTML =
-nom +
-" x" + qte +
-" (" + (qte*prix) +
+        liste.appendChild(li);
+    }
+
+    document.getElementById("total").innerText = total;
+}
+
+function commander(){
+
+    let total = 0;
+    let message = "Bonjour,%0A%0AJe souhaite commander :%0A";
+
+    for(let nom in panier){
+
+        let qte = panier[nom].quantite;
+        let prix = panier[nom].prix;
+
+        total += qte * prix;
+
+        message += "- " + nom + " x" + qte + "%0A";
+    }
+
+    message += "%0ATotal : " + total + " DH";
+
+    window.open(
+        "https://wa.me/212600000000?text=" + message
+    );
+}
+
 </script>
 
 </body>
