@@ -1,51 +1,166 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Restaurant Atlas</title>
 
 <style>
 
-body{
-font-family:Arial,sans-serif;
-background:#f4f4f4;
-padding:15px;
+*{
 margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
 }
 
-h1{
+body{
+background:#f5f5f5;
+padding-bottom:120px;
+}
+
+header{
+background:#222;
+color:white;
 text-align:center;
-margin-bottom:20px;
+padding:25px;
+}
+
+header h1{
+margin-bottom:10px;
+}
+
+.banner{
+width:100%;
+height:220px;
+object-fit:cover;
+}
+
+.section-title{
+padding:15px;
+font-size:24px;
+font-weight:bold;
 }
 
 .produit{
+
 background:white;
+margin:15px;
 border-radius:15px;
-padding:15px;
-margin-bottom:20px;
+overflow:hidden;
 box-shadow:0 2px 8px rgba(0,0,0,0.1);
+
 }
 
 .produit img{
+
 width:100%;
-border-radius:10px;
+height:220px;
+object-fit:cover;
+
 }
 
-button{
-width:100%;
-padding:12px;
-border:none;
-border-radius:10px;
-font-size:16px;
-cursor:pointer;
-}
+.info{
 
-.panier{
-background:white;
-border-radius:15px;
 padding:15px;
-box-shadow:0 2px 8px rgba(0,0,0,0.1);
+
+}
+
+.prix{
+
+font-size:20px;
+font-weight:bold;
+color:#27ae60;
+margin:10px 0;
+
+}
+
+.actions{
+
+display:flex;
+gap:10px;
+align-items:center;
+
+}
+
+.btn{
+
+padding:10px 15px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:18px;
+
+}
+
+.plus{
+background:#27ae60;
+color:white;
+}
+
+.moins{
+background:#e74c3c;
+color:white;
+}
+
+.panier-flottant{
+
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+
+background:white;
+
+box-shadow:0 -2px 10px rgba(0,0,0,0.2);
+
+padding:15px;
+
+z-index:999;
+
+}
+
+.total{
+
+font-size:22px;
+font-weight:bold;
+margin-bottom:10px;
+
+}
+
+.whatsapp{
+
+width:100%;
+padding:15px;
+border:none;
+background:#25D366;
+color:white;
+font-size:18px;
+border-radius:10px;
+cursor:pointer;
+
+}
+
+#contenu-panier{
+
+max-height:150px;
+overflow:auto;
+margin-bottom:10px;
+
+}
+
+.qrcode{
+
+text-align:center;
+padding:20px;
+
+}
+
+.qrcode img{
+
+width:180px;
+
 }
 
 </style>
@@ -53,143 +168,245 @@ box-shadow:0 2px 8px rgba(0,0,0,0.1);
 
 <body>
 
+<header>
+
 <h1>🍔 Restaurant Atlas</h1>
 
-<div class="produit">
-<h2>🍔 Burgers</h2>
+<p>Menu Digital</p>
+
+</header>
+
+<img
+class="banner"
+src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1200"
+>
+
+<div class="section-title">
+🍔 Burgers
+</div>
 
 <div class="produit">
+
+<img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1200">
+
+<div class="info">
+
 <h3>Double Burger</h3>
-<p>75 DH</p>
-<button onclick="ajouter('Double Burger',75)">Ajouter</button>
+
+<p>Double steak, cheddar, salade.</p>
+
+<div class="prix">75 DH</div>
+
+<div class="actions">
+
+<button
+class="btn plus"
+onclick="ajouter('Double Burger',75)">
++
+</button>
+
+<button
+class="btn moins"
+onclick="retirer('Double Burger')">
+-
+</button>
+
+</div>
+
+</div>
+
 </div>
 
 <div class="produit">
+
+<img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=1200">
+
+<div class="info">
+
 <h3>Chicken Burger</h3>
-<p>65 DH</p>
-<button onclick="ajouter('Chicken Burger',65)">Ajouter</button>
+
+<p>Poulet croustillant et fromage.</p>
+
+<div class="prix">65 DH</div>
+
+<div class="actions">
+
+<button
+class="btn plus"
+onclick="ajouter('Chicken Burger',65)">
++
+</button>
+
+<button
+class="btn moins"
+onclick="retirer('Chicken Burger')">
+-
+</button>
+
 </div>
 
-<h2>🌮 Tacos</h2>
+</div>
+
+</div>
+
+<div class="section-title">
+🌮 Tacos
+</div>
 
 <div class="produit">
+
+<img src="https://images.unsplash.com/photo-1613514785940-daed07799d9b?w=1200">
+
+<div class="info">
+
 <h3>Tacos Poulet</h3>
-<p>55 DH</p>
-<button onclick="ajouter('Tacos Poulet',55)">Ajouter</button>
+
+<p>Tacos au poulet mariné.</p>
+
+<div class="prix">55 DH</div>
+
+<div class="actions">
+
+<button
+class="btn plus"
+onclick="ajouter('Tacos Poulet',55)">
++
+</button>
+
+<button
+class="btn moins"
+onclick="retirer('Tacos Poulet')">
+-
+</button>
+
 </div>
 
-<div class="produit">
-<h3>Tacos Viande</h3>
-<p>65 DH</p>
-<button onclick="ajouter('Tacos Viande',65)">Ajouter</button>
 </div>
 
-<h2>🥤 Boissons</h2>
-
-<div class="produit">
-<h3>Coca-Cola</h3>
-<p>10 DH</p>
-<button onclick="ajouter('Coca-Cola',10)">Ajouter</button>
 </div>
 
-<div class="panier">
+<div class="section-title">
+📱 Scanner le menu
+</div>
 
-<h2>Panier</h2>
+<div class="qrcode">
 
-<ul id="liste"></ul>
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://VOTRE-NOM.github.io/menu-restaurant">
 
-<p>
-Total :
-<span id="total">0</span> DH
-</p>
+<p>Scannez pour accéder au menu</p>
 
-<button onclick="commander()">
+</div>
+
+<div class="panier-flottant">
+
+<div id="contenu-panier">
+Panier vide
+</div>
+
+<div class="total">
+Total : <span id="total">0</span> DH
+</div>
+
+<button
+class="whatsapp"
+onclick="commander()">
+
 Commander sur WhatsApp
+
 </button>
 
 </div>
 
 <script>
 
-let panier = {};
+let panier={};
 
-function ajouter(nom, prix){
+function ajouter(nom,prix){
 
-    if(!panier[nom]){
-        panier[nom] = {
-            quantite: 0,
-            prix: prix
-        };
-    }
+if(!panier[nom]){
 
-    panier[nom].quantite++;
-    afficherPanier();
+panier[nom]={
+qte:0,
+prix:prix
+};
+
+}
+
+panier[nom].qte++;
+
+afficherPanier();
+
 }
 
 function retirer(nom){
 
-    if(panier[nom]){
+if(!panier[nom]) return;
 
-        panier[nom].quantite--;
+panier[nom].qte--;
 
-        if(panier[nom].quantite <= 0){
-            delete panier[nom];
-        }
+if(panier[nom].qte<=0){
 
-        afficherPanier();
-    }
+delete panier[nom];
+
+}
+
+afficherPanier();
+
 }
 
 function afficherPanier(){
 
-    let liste = document.getElementById("liste");
+let html="";
+let total=0;
 
-    liste.innerHTML = "";
+for(let nom in panier){
 
-    let total = 0;
+let qte=panier[nom].qte;
+let prix=panier[nom].prix;
 
-    for(let nom in panier){
+total+=qte*prix;
 
-        let qte = panier[nom].quantite;
-        let prix = panier[nom].prix;
+html+=`
+<div>
+${nom} x${qte} = ${qte*prix} DH
+</div>
+`;
 
-        total += qte * prix;
+}
 
-        let li = document.createElement("li");
+if(html===""){
+html="Panier vide";
+}
 
-        li.innerHTML =
-        nom +
-        " x" + qte +
-        " - " + (qte * prix) +
-        " DH " +
-        '<button onclick="retirer(\'' + nom + '\')">-</button>';
+document.getElementById("contenu-panier").innerHTML=html;
 
-        liste.appendChild(li);
-    }
+document.getElementById("total").innerText=total;
 
-    document.getElementById("total").innerText = total;
 }
 
 function commander(){
 
-    let total = 0;
-    let message = "Bonjour,%0A%0AJe souhaite commander :%0A";
+let message="Bonjour,%0A%0AJe souhaite commander :%0A";
 
-    for(let nom in panier){
+let total=0;
 
-        let qte = panier[nom].quantite;
-        let prix = panier[nom].prix;
+for(let nom in panier){
 
-        total += qte * prix;
+let qte=panier[nom].qte;
+let prix=panier[nom].prix;
 
-        message += "- " + nom + " x" + qte + "%0A";
-    }
+total+=qte*prix;
 
-    message += "%0ATotal : " + total + " DH";
+message+=`- ${nom} x${qte}%0A`;
 
-    window.open(
-        "https://wa.me/212610164989?text=" + message
-    );
+}
+
+message+=`%0ATotal : ${total} DH`;
+
+window.open(
+"https://wa.me/212600000000?text="+message
+);
+
 }
 
 </script>
